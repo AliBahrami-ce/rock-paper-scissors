@@ -1,9 +1,6 @@
 from random import randint
 import os
 
-global player_choice_menu
-player_choice_menu = 0
-
 def game_menu():
     clear_screen()
     print('*' * 50) 
