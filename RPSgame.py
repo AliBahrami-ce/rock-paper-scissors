@@ -4,6 +4,14 @@ import os
 global player_choice_menu
 player_choice_menu = 0
 
+def game_menu():
+    clear_screen()
+    print('*' * 50) 
+    print('1. Rock')
+    print('2. Paper')
+    print('3. Scissor')
+    print('*' * 50)
+
 def press_enter():
     input('Press enter to continue...')
 
@@ -53,13 +61,8 @@ def options(choice):
 def player_bot():
     bot_choice_game = randint(1,3) # 1 = rock, 2 = paper, 3 = scissor
     
-    clear_screen()
-    print('*' * 50) 
-    print('1. Rock')
-    print('2. Paper')
-    print('3. Scissor')
-    print('*' * 50)
-    
+    game_menu()
+
     try:
         wrong_answer = True
         while wrong_answer:
@@ -88,9 +91,43 @@ def player_bot():
         print("What is that??! Next time, enter a NUMBER...")
         press_enter()
     
-def player_friend():
-    pass
-
+def player_friend(): 
+    try:
+        wrong_answer = True
+        while wrong_answer:
+            game_menu()
+            player1_choice_game = int(input('Player 1 -> Enter number of your choice: '))
+            if(player1_choice_game > 3 or player1_choice_game < 1):
+                print('ERORR : Please enter number between 1 to 3 :)')
+                print('-' * 50)
+            else:
+                game_menu()
+                player2_choice_game = int(input('Player 2 -> Enter number of your choice: '))
+                if(player2_choice_game > 3 or player2_choice_game < 1):
+                    print('ERORR : Please enter number between 1 to 3 :)')
+                    print('-' * 50)
+                else:
+                    result = get_winner(player1_choice_game, player2_choice_game)
+                    clear_screen()
+                    print('1. Rock || 2. Paper || 3. Scissor')
+                    print('+' * 50)
+                    print(f'Player 1 : {player1_choice_game} | Player 2 : {player2_choice_game}')
+                    if result == 'player1':
+                        print('<-> Player 1 WON... <-> \n')
+                        press_enter()
+                    elif result == 'player2':
+                        print('<-> Player 2 WON... <-> \n')
+                        press_enter()
+                    else:
+                        print('<-> DRAW... <-> \n')
+                        press_enter()
+                    
+                    wrong_answer = False
+                
+    except:
+        print("What is that??! Next time, enter a NUMBER...")
+        press_enter()
+    
 def get_winner(player1, player2):
     if player1 == player2:
         return 'Draw'
@@ -107,5 +144,4 @@ def get_winner(player1, player2):
     elif player1 == 3 and player2 == 2:
         return 'player1'
     
-
 menu()    
